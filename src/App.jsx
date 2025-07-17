@@ -1,3 +1,4 @@
+// src/App.jsx
 import "./App.css";
 import React from "react";
 import { Provider } from "react-redux";
@@ -7,8 +8,7 @@ import AuthProvider from "./context/AuthContext";
 import AppRoutes from "./routes/AppRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import EmployeeAttendancePDF from "./components/EmployeeAttendancePDF";
+// Removed unused imports if they were present (e.g., PDFDownloadLink, EmployeeAttendancePDF)
 
 function App() {
   return (

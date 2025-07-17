@@ -13,7 +13,7 @@ const EmployeeAttendance = ({ userId }) => {
       (r) => r.userId === userId && r.date === today
     )
   );
-  const [method] = useState("manual"); // Could be 'manual', 'qr', 'geo' later
+  const [method] = useState("manual"); 
 
   const handleCheckIn = () => {
     const now = new Date().toTimeString().slice(0, 5);

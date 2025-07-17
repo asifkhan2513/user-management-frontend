@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  records: [], // { userId, date, checkInTime, checkOutTime, status, workingHours, method }
-  holidays: [], // array of date strings
-  weekends: [0, 6], // Sunday (0) and Saturday (6) by default
+  records: [],
+  holidays: [],
+  weekends: [0, 6], 
   loadingHolidays: false,
   holidayError: null,
 };
@@ -41,12 +41,13 @@ const attendanceSlice = createSlice({
   reducers: {
     checkIn: (state, action) => {
       const { userId, date, time, method } = action.payload;
+      const stringUserId = String(userId);
       const record = state.records.find(
-        (r) => r.userId === userId && r.date === date
+        (r) => String(r.userId) === stringUserId && r.date === date
       );
       if (!record) {
         state.records.push({
-          userId,
+          userId: stringUserId, 
           date,
           checkInTime: time,
           checkOutTime: null,
@@ -58,8 +59,10 @@ const attendanceSlice = createSlice({
     },
     checkOut: (state, action) => {
       const { userId, date, time } = action.payload;
+      // Ensure userId is string for comparison
+      const stringUserId = String(userId);
       const record = state.records.find(
-        (r) => r.userId === userId && r.date === date
+        (r) => String(r.userId) === stringUserId && r.date === date
       );
       if (record && !record.checkOutTime) {
         record.checkOutTime = time;
@@ -75,19 +78,21 @@ const attendanceSlice = createSlice({
       }
     },
     setHoliday: (state, action) => {
-      state.holidays = action.payload; // array of date strings
+      state.holidays = action.payload; 
     },
     setWeekends: (state, action) => {
-      state.weekends = action.payload; // array of weekday numbers
+      state.weekends = action.payload; 
     },
     markAbsent: (state, action) => {
       const { userId, date } = action.payload;
+      // Ensure userId is string for storage and comparison
+      const stringUserId = String(userId);
       const record = state.records.find(
-        (r) => r.userId === userId && r.date === date
+        (r) => String(r.userId) === stringUserId && r.date === date
       );
       if (!record) {
         state.records.push({
-          userId,
+          userId: stringUserId, // Store as string
           date,
           checkInTime: null,
           checkOutTime: null,

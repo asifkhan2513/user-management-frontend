@@ -5,17 +5,19 @@ const EmployeeForm = ({ initial, onSubmit, onCancel }) => {
   const [email, setEmail] = useState(initial?.email || "");
   const [role, setRole] = useState(initial?.role || "employee");
   const [password, setPassword] = useState(initial?.password || "");
+  const [department, setDepartment] = useState(initial?.department || ""); // New state for department
 
   useEffect(() => {
     setName(initial?.name || "");
     setEmail(initial?.email || "");
     setRole(initial?.role || "employee");
     setPassword(initial?.password || "");
+    setDepartment(initial?.department || "");
   }, [initial]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ ...initial, name, email, role, password });
+    onSubmit({ ...initial, name, email, role, password, department });
   };
 
   return (
@@ -39,6 +41,17 @@ const EmployeeForm = ({ initial, onSubmit, onCancel }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 border rounded shadow-sm dark:bg-gray-700 dark:text-white"
+          required
+        />
+      </div>
+      {/* New Department field */}
+      <div className="mb-2">
+        <input
+          type="text"
+          placeholder="Department"
+          value={department}
+          onChange={(e) => setDepartment(e.target.value)}
           className="w-full p-2 border rounded shadow-sm dark:bg-gray-700 dark:text-white"
           required
         />
